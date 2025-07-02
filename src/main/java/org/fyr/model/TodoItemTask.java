@@ -1,4 +1,4 @@
-package org.fyr;
+package org.fyr.model;
 
 public class TodoItemTask {
     private int id;

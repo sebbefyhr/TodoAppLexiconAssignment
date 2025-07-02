@@ -1,4 +1,4 @@
-package org.fyr;
+package org.fyr.model;
 
 import java.time.LocalDate;
 

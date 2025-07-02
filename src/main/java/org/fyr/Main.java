@@ -1,7 +1,8 @@
 package org.fyr;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.fyr.model.Person;
+import org.fyr.model.TodoItem;
+import org.fyr.model.TodoItemTask;
 
 public class Main {
     public static void main(String[] args) {
