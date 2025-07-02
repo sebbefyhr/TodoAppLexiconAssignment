@@ -9,21 +9,21 @@ public class Person {
     public Person(){
 
     }
-    public Person(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+
     public Person(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+        if((firstName== null || firstName.trim().length() == 0) ||
+                (lastName == null || lastName.trim().length() == 0) ||
+                (email == null || email.trim().length() == 0)){
+            throw new NullPointerException("Cant be null");
+        }
+        this.firstName = firstName.trim();
+        this.lastName = lastName.trim();
+        this.email = email.trim();
     }
 
     public Person(int id, String firstName, String lastName, String email) {
+        this(firstName, lastName, email);
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
     }
 
     public int getId() {
@@ -39,6 +39,9 @@ public class Person {
     }
 
     public void setFirstName(String firstName) {
+        if(firstName == null ||firstName.trim().length() == 0){
+            throw new NullPointerException("First name cant be empty");
+        }
         this.firstName = firstName;
     }
 
@@ -47,18 +50,31 @@ public class Person {
     }
 
     public void setLastName(String lastName) {
+        if(lastName == null ||lastName.trim().length() == 0){
+            throw new NullPointerException("Last name cant be empty");
+        }
         this.lastName = lastName;
     }
 
     public String getEmail() {
+
         return email;
     }
 
     public void setEmail(String email) {
+        if(email == null ||email.trim().length() == 0){
+            throw new NullPointerException("Email cant be empty");
+        }
         this.email = email;
     }
 
     public String getSummary(){
-        return this.toString();
+        return "{" +
+                "id: " + id +
+                ", name: " + firstName +" " + lastName  +
+                ", email: " + email  +
+                '}';
+
     }
+
 }

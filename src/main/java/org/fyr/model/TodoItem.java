@@ -24,6 +24,9 @@ public class TodoItem {
 
 
     public TodoItem(String title, String description, LocalDate deadLine, boolean done, Person creator) {
+        if((title == null || title.trim().length() == 0) || (deadLine == null)){
+            throw new NullPointerException("Fields cant be null or empty");
+        }
         this.title = title;
         this.description = description;
         this.deadLine = deadLine;
@@ -44,6 +47,9 @@ public class TodoItem {
     }
 
     public void setTitle(String title) {
+        if(title == null || title.trim().length() == 0){
+            throw new NullPointerException("Title cant be null or empty");
+        }
         this.title = title;
     }
 
@@ -60,6 +66,9 @@ public class TodoItem {
     }
 
     public void setDeadLine(LocalDate deadLine) {
+        if(deadLine == null){
+            throw new NullPointerException("Deadline cant be null");
+        }
         this.deadLine = deadLine;
     }
 
@@ -80,7 +89,13 @@ public class TodoItem {
     }
 
     public String getSummary(){
-        return this.toString();
+        return "{id: " + id +
+                ", title: " +title +
+                ", descritpion: " +description +
+                ", deadline: " + deadLine +
+                ", done: " + done +
+                ", creator: " + creator.getSummary() +
+                "}";
     }
 
     public boolean isOverdue(){

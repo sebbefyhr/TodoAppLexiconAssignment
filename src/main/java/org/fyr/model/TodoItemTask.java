@@ -11,6 +11,9 @@ public class TodoItemTask {
     }
 
     public TodoItemTask(int id, TodoItem todoItem, Person assignee) {
+        if(todoItem == null){
+            throw new NullPointerException("Cant be null");
+        }
         this.id = id;
         this.assigned = assignee != null ? true : false;
         this.todoItem = todoItem;
@@ -18,6 +21,9 @@ public class TodoItemTask {
     }
 
     public TodoItemTask(TodoItem todoItem, Person assignee) {
+        if(todoItem == null){
+            throw new NullPointerException("Cant be null");
+        }
         this.assigned = assignee != null ? true : false;
         this.todoItem = todoItem;
         this.assignee = assignee;
@@ -35,9 +41,8 @@ public class TodoItemTask {
         return assigned;
     }
 
-    public void setAssigned(/*boolean assigned*/) {
-
-        this.assigned = assignee != null ? true : false;
+    public void setAssigned(boolean assigned) {
+        this.assigned = assigned;
     }
 
     public TodoItem getTodoItem() {
@@ -45,6 +50,9 @@ public class TodoItemTask {
     }
 
     public void setTodoItem(TodoItem todoItem) {
+        if(todoItem == null){
+            throw new NullPointerException("Cant be null");
+        }
         this.todoItem = todoItem;
     }
 
@@ -55,10 +63,18 @@ public class TodoItemTask {
     public void setAssignee(Person assignee) {
         if (assignee == null) {
             this.assignee = null;
-            setAssigned();
+            setAssigned(false);
         } else {
             this.assignee = assignee;
-            setAssigned();
+            setAssigned(true);
         }
+    }
+
+    public String getSummary(){
+        return "{id: " + id +
+                ", assigned: " + assigned +
+                ", todoItem: " + todoItem +
+                ", assignee: " + assignee +
+                "} ";
     }
 }
