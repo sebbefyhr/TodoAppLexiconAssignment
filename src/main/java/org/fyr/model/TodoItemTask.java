@@ -73,8 +73,8 @@ public class TodoItemTask {
     public String getSummary(){
         return "{id: " + id +
                 ", assigned: " + assigned +
-                ", todoItem: " + todoItem +
-                ", assignee: " + assignee +
+                ", todoItem: " + todoItem.getSummary() +
+                ", assignee: " + assignee.getSummary() +
                 "} ";
     }
 }
