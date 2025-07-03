@@ -1,5 +1,7 @@
 package org.fyr.model;
 
+import java.util.Objects;
+
 public class TodoItemTask {
     private int id;
     private boolean assigned;
@@ -70,11 +72,24 @@ public class TodoItemTask {
         }
     }
 
-    public String getSummary(){
-        return "{id: " + id +
-                ", assigned: " + assigned +
-                ", todoItem: " + todoItem.getSummary() +
-                ", assignee: " + assignee.getSummary() +
-                "} ";
+    @Override
+    public String toString() {
+        return "TodoItemTask{" +
+                "id=" + id +
+                ", assigned=" + assigned +
+                ", todoItem=" + todoItem +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TodoItemTask that = (TodoItemTask) o;
+        return id == that.id && assigned == that.assigned && Objects.equals(todoItem, that.todoItem);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, assigned, todoItem);
     }
 }
