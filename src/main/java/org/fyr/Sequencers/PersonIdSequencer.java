@@ -1,5 +1,6 @@
 package org.fyr.Sequencers;
 
+//TODO -- Se över så att jag inte har missat något
 public class PersonIdSequencer {
 
     private static int currentId;

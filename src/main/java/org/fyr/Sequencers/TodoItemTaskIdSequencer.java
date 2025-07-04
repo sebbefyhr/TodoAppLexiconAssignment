@@ -1,9 +1,10 @@
 package org.fyr.Sequencers;
 
+//TODO -- Se över så att jag inte har missat något
 public class TodoItemTaskIdSequencer {
 
     private static int currentId;
-    private static TodoItemIdSequencer todoItemIdSequencer;
+    private static TodoItemTaskIdSequencer TodoItemTaskIdSequencer;
 
     private TodoItemTaskIdSequencer(){}
 
@@ -18,11 +19,11 @@ public class TodoItemTaskIdSequencer {
         currentId = id;
     }
 
-    public static TodoItemIdSequencer getInstance(){
-        if(todoItemIdSequencer == null){
-            todoItemIdSequencer = new TodoItemIdSequencer();
+    public static TodoItemTaskIdSequencer getInstance(){
+        if(TodoItemTaskIdSequencer == null){
+            TodoItemTaskIdSequencer = new TodoItemTaskIdSequencer();
         }
-        return todoItemIdSequencer;
+        return TodoItemTaskIdSequencer;
     }
 
 }

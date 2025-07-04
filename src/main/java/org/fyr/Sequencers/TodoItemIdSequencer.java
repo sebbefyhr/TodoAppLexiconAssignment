@@ -1,5 +1,7 @@
 package org.fyr.Sequencers;
 
+
+//TODO -- Se över så att jag inte har missat något
 public class TodoItemIdSequencer {
     private static int currentId;
     private static TodoItemIdSequencer todoItemIdSequencer;
