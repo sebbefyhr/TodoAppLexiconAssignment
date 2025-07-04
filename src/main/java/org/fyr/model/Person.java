@@ -1,25 +1,30 @@
 package org.fyr.model;
 
+import org.fyr.Sequencers.PersonIdSequencer;
+
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Person {
+public class Person implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
     private String email;
     private AppUser credentials;
 
+    private PersonIdSequencer personIdSequencer = PersonIdSequencer.getInstance();
+
     public Person(){
 
     }
 
-    public Person(int id, String firstName, String lastName, String email, AppUser creds) {
+    public Person(String firstName, String lastName, String email, AppUser creds) {
         if((firstName== null || firstName.trim().length() == 0) ||
                 (lastName == null || lastName.trim().length() == 0) ||
                 (email == null || email.trim().length() == 0)){
             throw new NullPointerException("Cant be null");
         }
-        this.id = id;
+        this.id = personIdSequencer.nextId();
         this.firstName = firstName.trim();
         this.lastName = lastName.trim();
         this.email = email.trim();
@@ -67,6 +72,14 @@ public class Person {
             throw new NullPointerException("Email cant be empty");
         }
         this.email = email;
+    }
+
+    public AppUser getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(AppUser credentials) {
+        this.credentials = credentials;
     }
 
     @Override

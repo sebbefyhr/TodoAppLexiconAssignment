@@ -5,13 +5,16 @@ import org.fyr.model.Person;
 import java.util.Collection;
 import java.util.List;
 
+//TODO -- • Use the Stream API in implementing DAO classes
 public class PersonDaoCollection implements PersonDAO{
 
+    private static PersonDaoCollection personDaoCollection;
 
-
+    private PersonDaoCollection(){}
 
     @Override
     public Person persist(Person person) {
+
         return null;
     }
 
@@ -33,5 +36,12 @@ public class PersonDaoCollection implements PersonDAO{
     @Override
     public void remove(int id) {
 
+    }
+
+    public static PersonDaoCollection getInstance(){
+        if(personDaoCollection == null){
+            personDaoCollection = new PersonDaoCollection();
+        }
+        return personDaoCollection;
     }
 }

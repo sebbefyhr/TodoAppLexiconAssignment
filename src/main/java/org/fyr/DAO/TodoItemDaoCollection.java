@@ -6,9 +6,11 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
+
+//TODO -- • Use the Stream API in implementing DAO classes
 public class TodoItemDaoCollection implements TodoItemDAO{
 
-
+    private static TodoItemDaoCollection todoItemDaoCollection;
 
     @Override
     public TodoItem persist(TodoItem todoItem) {
@@ -53,5 +55,12 @@ public class TodoItemDaoCollection implements TodoItemDAO{
     @Override
     public void remove(int id) {
 
+    }
+
+    public static TodoItemDaoCollection getInstance(){
+        if(todoItemDaoCollection == null){
+            todoItemDaoCollection = new TodoItemDaoCollection();
+        }
+        return todoItemDaoCollection;
     }
 }

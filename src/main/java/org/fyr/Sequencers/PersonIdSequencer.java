@@ -1,15 +1,17 @@
 package org.fyr.Sequencers;
 
+import java.io.Serializable;
+
 //TODO -- Se över så att jag inte har missat något
-public class PersonIdSequencer {
+public class PersonIdSequencer implements Serializable {
 
     private static int currentId;
     private static PersonIdSequencer personIdSequencer;
 
     private PersonIdSequencer(){}
 
-    private static int nextId(){
-        return currentId++;
+    public int nextId(){
+        return ++currentId;
     }
 
     public static int getCurrentId(){

@@ -4,7 +4,7 @@ import org.fyr.model.AppUser;
 
 import java.util.Collection;
 
-public interface AppUserDAO {
+public interface AppUserDAO<T> {
 
     AppUser persist(AppUser appUser);
     AppUser findByUsername(String username);

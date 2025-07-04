@@ -5,7 +5,15 @@ import org.fyr.model.TodoItemTask;
 import java.util.Collection;
 import java.util.List;
 
+
+//TODO -- • Use the Stream API in implementing DAO classes
 public class TodoItemTaskDAOCollection implements TodoItemTaskDAO{
+
+    private static TodoItemTaskDAOCollection todoItemTaskDAOCollection;
+
+    private TodoItemTaskDAOCollection(){
+    }
+
     @Override
     public TodoItemTask persist(TodoItemTask todoItemTask) {
         return null;
@@ -34,5 +42,12 @@ public class TodoItemTaskDAOCollection implements TodoItemTaskDAO{
     @Override
     public void remove(int id) {
 
+    }
+
+    public static TodoItemTaskDAOCollection getInstance(){
+        if(todoItemTaskDAOCollection == null){
+            todoItemTaskDAOCollection = new TodoItemTaskDAOCollection();
+        }
+        return todoItemTaskDAOCollection;
     }
 }

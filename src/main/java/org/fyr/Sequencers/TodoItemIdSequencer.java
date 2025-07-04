@@ -9,7 +9,7 @@ public class TodoItemIdSequencer {
     private TodoItemIdSequencer(){}
 
     public static int getNextId(){
-        return currentId++;
+        return ++currentId;
     }
     public static int getCurrentId() {
         return currentId;
