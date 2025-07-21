@@ -11,8 +11,7 @@ public class TodoItemTaskDAOCollection implements TodoItemTaskDAO{
 
     private static TodoItemTaskDAOCollection todoItemTaskDAOCollection;
 
-    private TodoItemTaskDAOCollection(){
-    }
+    private TodoItemTaskDAOCollection(){}
 
     @Override
     public TodoItemTask persist(TodoItemTask todoItemTask) {
@@ -31,11 +30,13 @@ public class TodoItemTaskDAOCollection implements TodoItemTaskDAO{
 
     @Override
     public Collection<TodoItemTask> findByAssignedStatus(boolean status) {
+
         return List.of();
     }
 
     @Override
     public Collection<TodoItemTask> findByPersonId(int personId) {
+
         return List.of();
     }
 
