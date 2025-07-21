@@ -9,6 +9,8 @@ public class AppUser implements Serializable {
     private AppRole role;
 
 
+    public AppUser(){}
+
     public AppUser(String username, String password, AppRole role){
         if((username == null || username.isEmpty()) ||(password == null || password.isEmpty())){
             throw new NullPointerException("Username or password cant be empty or null");

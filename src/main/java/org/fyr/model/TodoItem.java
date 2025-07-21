@@ -1,5 +1,7 @@
 package org.fyr.model;
 
+import org.fyr.Sequencers.TodoItemIdSequencer;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -12,22 +14,16 @@ public class TodoItem {
     private boolean done;
     private Person creator;
 
-    public TodoItem(){}
+    private TodoItemIdSequencer tiis = TodoItemIdSequencer.getInstance();
 
-    public TodoItem(int id, String title, String description, LocalDate deadLine, boolean done, Person creator) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.deadLine = deadLine;
-        this.done = done;
-        this.creator = creator;
-    }
+    public TodoItem(){}
 
 
     public TodoItem(String title, String description, LocalDate deadLine, boolean done, Person creator) {
         if((title == null || title.trim().length() == 0) || (deadLine == null)){
             throw new NullPointerException("Fields cant be null or empty");
         }
+        this.id = tiis.nextId();
         this.title = title;
         this.description = description;
         this.deadLine = deadLine;

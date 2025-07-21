@@ -1,5 +1,8 @@
 package org.fyr.model;
 
+import org.fyr.Sequencers.TodoItemIdSequencer;
+import org.fyr.Sequencers.TodoItemTaskIdSequencer;
+
 import java.util.Objects;
 
 public class TodoItemTask {
@@ -8,28 +11,20 @@ public class TodoItemTask {
     private TodoItem todoItem;
     private Person assignee;
 
-    public TodoItemTask() {
+    private TodoItemTaskIdSequencer titis = TodoItemTaskIdSequencer.getInstance();
 
-    }
-
-    public TodoItemTask(int id, TodoItem todoItem, Person assignee) {
-        if(todoItem == null){
-            throw new NullPointerException("Cant be null");
-        }
-        this.id = id;
-        this.assigned = assignee != null ? true : false;
-        this.todoItem = todoItem;
-        this.assignee = assignee;
-    }
+    public TodoItemTask() {}
 
     public TodoItemTask(TodoItem todoItem, Person assignee) {
         if(todoItem == null){
             throw new NullPointerException("Cant be null");
         }
+        this.id = titis.nextId();
         this.assigned = assignee != null ? true : false;
         this.todoItem = todoItem;
         this.assignee = assignee;
     }
+
 
     public int getId() {
         return id;
