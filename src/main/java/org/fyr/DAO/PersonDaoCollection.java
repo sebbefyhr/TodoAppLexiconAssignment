@@ -76,9 +76,8 @@ public class PersonDaoCollection implements PersonDAO, Serializable {
 
     public void loadPersons(){
 
-        //TODO -- Rensa upp kommentarer.
-
         mapper.configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);
+
         try(FileReader reader = new FileReader(file)){
 
             personList = mapper.readValue(reader, new TypeReference<List<Person>>(){});
@@ -95,7 +94,7 @@ public class PersonDaoCollection implements PersonDAO, Serializable {
         try(FileWriter writer = new FileWriter(file)) {
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-            writer.write(mapper.writeValueAsString(personList).toString());
+            writer.write(mapper.writeValueAsString(personList));
 
             personList.clear();
         } catch (JsonProcessingException e) {

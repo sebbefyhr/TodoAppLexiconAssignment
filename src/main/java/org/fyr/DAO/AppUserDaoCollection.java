@@ -19,8 +19,6 @@ public class AppUserDaoCollection implements AppUserDAO<AppUser>, Serializable {
     private static AppUserDaoCollection appUserDaoCollection;
 
     private ObjectMapper mapper = new ObjectMapper();
-
-
     private String file = "src/main/resources/protocols/Appuser.json";
 
     // TODO -- Göra till Set istället för List???
@@ -78,6 +76,7 @@ public class AppUserDaoCollection implements AppUserDAO<AppUser>, Serializable {
     public void loadAppusers(){
 
         try(FileReader reader = new FileReader(file)){
+
             appUsers = mapper.readValue(reader, new TypeReference<List<AppUser>>() {});
 
         } catch (FileNotFoundException e) {
@@ -93,7 +92,7 @@ public class AppUserDaoCollection implements AppUserDAO<AppUser>, Serializable {
 
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-            writer.write(mapper.writeValueAsString(appUsers).toString());
+            writer.write(mapper.writeValueAsString(appUsers));
 
             appUsers.clear();
 

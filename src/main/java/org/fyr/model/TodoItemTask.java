@@ -5,6 +5,8 @@ import org.fyr.Sequencers.TodoItemTaskIdSequencer;
 
 import java.util.Objects;
 
+
+// TODO --REVISIT this class and find if it is properly implemented?!?!
 public class TodoItemTask {
     private int id;
     private boolean assigned;
