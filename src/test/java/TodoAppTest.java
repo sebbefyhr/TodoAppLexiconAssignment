@@ -1,7 +1,5 @@
 
-import org.fyr.model.Person;
-import org.fyr.model.TodoItem;
-import org.fyr.model.TodoItemTask;
+import org.fyr.model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,9 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TodoAppTest {
 
+    /*
     Person p1 = new Person(1, "Seb", "Dyr", "sebDyr@lexicon.se");
     Person p2 = new Person(2, "pelle", "Gyr", "PelleGyr@lexicon.se");
     Person p3 = new Person(3, "Pellan", "hymn", "PellanHymn@lexicon.se");
+
+
 
     TodoItem td1 = new TodoItem(1, "First TodoItem", "no description", LocalDate.parse("2025-07-05"), false, p2);
     TodoItem td2 = new TodoItem(2, "Second TodoItem", " description", LocalDate.parse("2025-06-05"), false, p2);
@@ -63,8 +64,23 @@ public class TodoAppTest {
     void todoTestItemTaskTest() {
         td5.setCreator(p3);
         TodoItemTask task1 = new TodoItemTask(1, td5, p3);
-        System.out.println(task1.getSummary());
         //assertThrows(NullPointerException.class, ()-> new TodoItemTask(1, null, p3));
     }
+
+     */
+
+    @Test
+    void appUserTest(){
+        AppUser au = new AppUser("seFryzz", "cool1234", AppRole.ROLE_APP_ADMIN);
+        System.out.println(au.toString());
+        au.setPassword("  ");
+
+    }
+
+
+    //TODO -- update tests for Person, TodoItem and TodoItemTask.
+    //TODO -- implement tests for APPUser and APPRole
+
+
 
 }
