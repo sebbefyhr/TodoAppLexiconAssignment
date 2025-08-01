@@ -10,8 +10,7 @@ import org.fyr.model.Person;
 import java.io.*;
 import java.util.*;
 
-//TODO -- • Use the Stream API in implementing DAO classes
-public class PersonDaoCollection implements PersonDAO, Serializable {
+public class PersonDaoCollection implements PersonDAO<Person>, Serializable {
 
     private static PersonDaoCollection personDaoCollection;
 

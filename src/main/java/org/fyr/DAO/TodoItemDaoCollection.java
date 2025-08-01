@@ -14,8 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-//TODO -- • Use the Stream API in implementing DAO classes
-public class TodoItemDaoCollection implements TodoItemDAO {
+public class TodoItemDaoCollection implements TodoItemDAO<TodoItem> {
 
     private static TodoItemDaoCollection todoItemDaoCollection;
     private final String file = "src/main/resources/protocols/TodoItem.json";

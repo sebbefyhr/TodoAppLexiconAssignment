@@ -6,9 +6,9 @@ import java.util.Collection;
 
 public interface AppUserDAO<T> {
 
-    AppUser persist(AppUser appUser);
-    AppUser findByUsername(String username);
-    Collection<AppUser> findAll();
+    T persist(T appUser);
+    T findByUsername(String username);
+    Collection<T> findAll();
     void remove(String username);
 
 }

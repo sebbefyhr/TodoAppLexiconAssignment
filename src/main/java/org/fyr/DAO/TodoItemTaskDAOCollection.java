@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class TodoItemTaskDAOCollection implements TodoItemTaskDAO {
+public class TodoItemTaskDAOCollection implements TodoItemTaskDAO<TodoItemTask> {
 
     private static TodoItemTaskDAOCollection todoItemTaskDAOCollection;
     private String file = "src/main/resources/protocols/TodoItemTask.json";

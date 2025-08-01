@@ -1,7 +1,7 @@
 package org.fyr.Sequencers;
 
 //TODO -- Se över så att jag inte har missat något
-public class TodoItemTaskIdSequencer {
+public class TodoItemTaskIdSequencer extends Sequencer {
 
     private int currentId;
     private static TodoItemTaskIdSequencer TodoItemTaskIdSequencer;

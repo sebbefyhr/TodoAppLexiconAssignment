@@ -1,8 +1,10 @@
 package org.fyr.Sequencers;
 
 
+import java.io.Serializable;
+
 //TODO -- Se över så att jag inte har missat något
-public class TodoItemIdSequencer {
+public class TodoItemIdSequencer extends Sequencer {
     private int currentId;
     private static TodoItemIdSequencer todoItemIdSequencer;
 

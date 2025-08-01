@@ -4,12 +4,12 @@ import org.fyr.model.TodoItemTask;
 
 import java.util.Collection;
 
-public interface TodoItemTaskDAO {
+public interface TodoItemTaskDAO<T> {
 
-    TodoItemTask persist(TodoItemTask todoItemTask);
-    TodoItemTask findById(int id);
-    Collection<TodoItemTask> findAll();
-    Collection<TodoItemTask> findByAssignedStatus(boolean status);
-    Collection<TodoItemTask> findByPersonId(int personId);
+    T persist(T todoItemTask);
+    T findById(int id);
+    Collection<T> findAll();
+    Collection<T> findByAssignedStatus(boolean status);
+    Collection<T> findByPersonId(int personId);
     void remove(int id);
 }

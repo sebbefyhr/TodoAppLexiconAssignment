@@ -5,15 +5,15 @@ import org.fyr.model.TodoItem;
 import java.time.LocalDate;
 import java.util.Collection;
 
-public interface TodoItemDAO {
+public interface TodoItemDAO<T> {
 
-    TodoItem persist(TodoItem todoItem);
-    TodoItem findById(int id);
-    Collection<TodoItem> findAll();
-    Collection<TodoItem> findAllByDoneStatus(boolean done);
-    Collection<TodoItem> findByTitleContains(String title);
-    Collection<TodoItem> findByPersonId(int personId);
-    Collection<TodoItem> findByDeadlineBefore(LocalDate date);
-    Collection<TodoItem> findByDeadlineAfter(LocalDate date);
+    T persist(T todoItem);
+    T findById(int id);
+    Collection<T> findAll();
+    Collection<T> findAllByDoneStatus(boolean done);
+    Collection<T> findByTitleContains(String title);
+    Collection<T> findByPersonId(int personId);
+    Collection<T> findByDeadlineBefore(LocalDate date);
+    Collection<T> findByDeadlineAfter(LocalDate date);
     void remove(int id);
 }

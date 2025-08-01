@@ -4,11 +4,11 @@ import org.fyr.model.Person;
 
 import java.util.Collection;
 
-public interface PersonDAO {
+public interface PersonDAO<T> {
 
-    Person persist(Person person);
-    Person findById(int id);
-    Person findByEmail(String email);
-    Collection<Person> findAll();
+    T persist(T person);
+    T findById(int id);
+    T findByEmail(String email);
+    Collection<T> findAll();
     void remove(int id);
 }

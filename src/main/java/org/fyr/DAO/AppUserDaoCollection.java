@@ -6,14 +6,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import org.fyr.model.AppUser;
 
 import java.io.*;
-import java.lang.runtime.ObjectMethods;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 
-//TODO -- • Use the Stream API in implementing DAO classes
 public class AppUserDaoCollection implements AppUserDAO<AppUser>, Serializable {
 
     private static AppUserDaoCollection appUserDaoCollection;
@@ -21,7 +19,6 @@ public class AppUserDaoCollection implements AppUserDAO<AppUser>, Serializable {
     private ObjectMapper mapper = new ObjectMapper();
     private String file = "src/main/resources/protocols/Appuser.json";
 
-    // TODO -- Göra till Set istället för List???
     private List<AppUser> appUsers;
 
 
@@ -31,6 +28,7 @@ public class AppUserDaoCollection implements AppUserDAO<AppUser>, Serializable {
 
     @Override
     public AppUser persist(AppUser appUser) {
+
         if(appUsers.contains(appUser)){
             return appUser;
         }
@@ -41,8 +39,6 @@ public class AppUserDaoCollection implements AppUserDAO<AppUser>, Serializable {
 
     @Override
     public AppUser findByUsername(String username) {
-
-        //TODO -- Equals eller equalsIgnoreCase??
 
          Optional<AppUser> appie  =  appUsers.stream()
                 .filter(s -> s.getUsername().equalsIgnoreCase(username))
@@ -60,7 +56,6 @@ public class AppUserDaoCollection implements AppUserDAO<AppUser>, Serializable {
     @Override
     public void remove(String username) {
         appUsers.removeIf(s ->
-                //TODO -- Equals eller equalsIgnoreCase??
             s.getUsername().equalsIgnoreCase(username));
 
     }
@@ -76,7 +71,7 @@ public class AppUserDaoCollection implements AppUserDAO<AppUser>, Serializable {
     public void loadAppusers(){
 
         try(FileReader reader = new FileReader(file)){
-
+            mapper.enable(SerializationFeature.INDENT_OUTPUT);
             appUsers = mapper.readValue(reader, new TypeReference<List<AppUser>>() {});
 
         } catch (FileNotFoundException e) {
@@ -100,4 +95,5 @@ public class AppUserDaoCollection implements AppUserDAO<AppUser>, Serializable {
             throw new RuntimeException(e);
         }
     }
+
 }
