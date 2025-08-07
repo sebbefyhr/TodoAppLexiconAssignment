@@ -90,7 +90,6 @@ public class PersonDaoCollection implements PersonDAO<Person>, Serializable {
     }
 
     public void savePersons(){
-        System.out.println("--------------------------------------\nSave Persons method\n--------------------------------------");
         try(FileWriter writer = new FileWriter(file)) {
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
