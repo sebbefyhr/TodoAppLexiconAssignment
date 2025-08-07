@@ -39,6 +39,8 @@ public class Main {
          * First question is  the first line in the static block in the main class.
          *
          * The second question is in the "loadIDSequencers" method after the main method in the Main class.
+         *
+         * Third question is in "GeneralDao" interface.
          */
 
 

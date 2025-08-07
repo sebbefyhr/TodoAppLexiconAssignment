@@ -6,7 +6,6 @@ import org.fyr.Sequencers.TodoItemTaskIdSequencer;
 import java.util.Objects;
 
 
-
 public class TodoItemTask {
     private int id;
     private boolean assigned;
