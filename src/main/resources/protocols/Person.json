@@ -18,4 +18,24 @@
     "password" : "User12345",
     "role" : "ROLE_APP_USER"
   }
+}, {
+  "id" : 3,
+  "firstName" : "Sebbe",
+  "lastName" : "Fyr",
+  "email" : "Sebster@cool.com",
+  "credentials" : {
+    "username" : "Sebster",
+    "password" : "Admin12345",
+    "role" : "ROLE_APP_ADMIN"
+  }
+}, {
+  "id" : 4,
+  "firstName" : "simon",
+  "lastName" : "elbrink",
+  "email" : "simon@lexicon.com",
+  "credentials" : {
+    "username" : "SIMONZXZXZXZ",
+    "password" : "User12345",
+    "role" : "ROLE_APP_USER"
+  }
 } ]
