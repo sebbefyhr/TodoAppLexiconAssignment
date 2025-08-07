@@ -14,10 +14,19 @@ public class Person implements Serializable {
 
     private PersonIdSequencer personIdSequencer = PersonIdSequencer.getInstance();
 
-    public Person(){
+    public Person(){}
 
+    public Person(String firstName, String lastName, String email) {
+        if((firstName== null || firstName.trim().length() == 0) ||
+                (lastName == null || lastName.trim().length() == 0) ||
+                (email == null || email.trim().length() == 0)){
+            throw new NullPointerException("Cant be null");
+        }
+        this.id = personIdSequencer.nextId();
+        this.firstName = firstName.trim();
+        this.lastName = lastName.trim();
+        this.email = email.trim();
     }
-
     public Person(String firstName, String lastName, String email, AppUser creds) {
         if((firstName== null || firstName.trim().length() == 0) ||
                 (lastName == null || lastName.trim().length() == 0) ||
@@ -34,10 +43,6 @@ public class Person implements Serializable {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -63,7 +68,6 @@ public class Person implements Serializable {
     }
 
     public String getEmail() {
-
         return email;
     }
 

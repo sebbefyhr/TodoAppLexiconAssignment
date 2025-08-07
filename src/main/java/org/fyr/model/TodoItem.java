@@ -21,7 +21,7 @@ public class TodoItem {
 
     public TodoItem(String title, String description, LocalDate deadLine, boolean done, Person creator) {
         if((title == null || title.trim().length() == 0) || (deadLine == null)){
-            throw new NullPointerException("Fields cant be null or empty");
+            throw new NullPointerException("Title or deadline cant be null or empty");
         }
         this.id = tiis.nextId();
         this.title = title;
@@ -33,10 +33,6 @@ public class TodoItem {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -64,7 +60,7 @@ public class TodoItem {
 
     public void setDeadLine(LocalDate deadLine) {
         if(deadLine == null){
-            throw new NullPointerException("Deadline cant be null");
+            throw new NullPointerException("Deadline cant be empty");
         }
         this.deadLine = deadLine;
     }

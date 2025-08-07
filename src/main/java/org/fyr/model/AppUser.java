@@ -9,11 +9,15 @@ public class AppUser implements Serializable {
     private AppRole role;
 
 
-    public AppUser(){}
+    public AppUser() {
+    }
 
-    public AppUser(String username, String password, AppRole role){
-        if((username == null || username.isEmpty()) ||(password == null || password.isEmpty())){
+    public AppUser(String username, String password, AppRole role) {
+        if ((username == null || username.trim().isEmpty()) || (password == null || password.trim().isEmpty())) {
             throw new NullPointerException("Username or password cant be empty or null");
+        }
+        if (role == null) {
+            throw new NullPointerException("Role must be declared");
         }
         this.username = username;
         this.password = password;
@@ -23,26 +27,36 @@ public class AppUser implements Serializable {
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
-        if(username == null || username.isEmpty()){
+        if (username == null || username.trim().isEmpty()) {
             throw new NullPointerException("Username cant be empty or null");
         }
         this.username = username;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
-        if(password == null || password.isEmpty()){
+        if (password == null || password.trim().isEmpty()) {
             throw new NullPointerException("Password cant be empty or null");
         }
         this.password = password;
     }
+
     public AppRole getRole() {
         return role;
     }
+
     public void setRole(AppRole role) {
-        this.role = role;
+
+        if (role == null) {
+            throw new NullPointerException("Role must be declared");
+        } else {
+            this.role = role;
+        }
     }
 
     @Override
