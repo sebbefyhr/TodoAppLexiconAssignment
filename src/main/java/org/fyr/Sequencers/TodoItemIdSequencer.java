@@ -3,8 +3,8 @@ package org.fyr.Sequencers;
 
 import java.io.Serializable;
 
-//TODO -- Se över så att jag inte har missat något
 public class TodoItemIdSequencer extends Sequencer {
+
     private int currentId;
     private static TodoItemIdSequencer todoItemIdSequencer;
 
@@ -17,8 +17,11 @@ public class TodoItemIdSequencer extends Sequencer {
         return currentId;
     }
 
-    public void setCurrentId(int currentId) {
-        currentId = currentId;
+    public void setCurrentId(int id) {
+        if(id < 0){
+            throw new IllegalArgumentException("ID cant be a negative number");
+        }
+        currentId = id;
     }
 
     public static TodoItemIdSequencer getInstance(){

@@ -1,6 +1,5 @@
 package org.fyr.Sequencers;
 
-//TODO -- Se över så att jag inte har missat något
 public class TodoItemTaskIdSequencer extends Sequencer {
 
     private int currentId;
@@ -16,6 +15,9 @@ public class TodoItemTaskIdSequencer extends Sequencer {
         return currentId;
     }
     public void setCurrentId(int id){
+        if(id < 0){
+            throw new IllegalArgumentException("ID cant be a negative number");
+        }
         currentId = id;
     }
 

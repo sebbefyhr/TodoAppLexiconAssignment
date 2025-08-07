@@ -2,8 +2,7 @@ package org.fyr.Sequencers;
 
 import java.io.Serializable;
 
-//TODO -- Se över så att jag inte har missat något
-public class PersonIdSequencer implements Serializable {
+public class PersonIdSequencer extends Sequencer {
 
     private int currentId;
     private static PersonIdSequencer personIdSequencer;
@@ -19,6 +18,9 @@ public class PersonIdSequencer implements Serializable {
     }
 
     public void setCurrentId(int id){
+        if(id < 0 ){
+            throw new IllegalArgumentException("ID cant be a negative number");
+        }
         currentId = id;
     }
 
