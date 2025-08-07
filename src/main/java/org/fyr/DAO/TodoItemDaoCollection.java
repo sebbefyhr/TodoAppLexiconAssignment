@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.fyr.model.TodoItem;
 
+import java.awt.desktop.OpenFilesEvent;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public class TodoItemDaoCollection implements TodoItemDAO<TodoItem> {
 
@@ -27,6 +29,7 @@ public class TodoItemDaoCollection implements TodoItemDAO<TodoItem> {
 
     @Override
     public TodoItem persist(TodoItem todoItem) {
+
         if (todoItems.contains(todoItem)) {
             return todoItem;
         }
@@ -37,10 +40,11 @@ public class TodoItemDaoCollection implements TodoItemDAO<TodoItem> {
     @Override
     public TodoItem findById(int id) {
 
-        return todoItems.stream()
+        Optional<TodoItem> opt = todoItems.stream()
                 .filter(s -> s.getId() == id)
-                .findFirst()
-                .get();
+                .findFirst();
+
+        return opt.orElse(null);
     }
 
     @Override
@@ -59,7 +63,7 @@ public class TodoItemDaoCollection implements TodoItemDAO<TodoItem> {
     @Override
     public Collection<TodoItem> findByTitleContains(String title) {
         return todoItems.stream()
-                .filter(s -> s.getTitle().equalsIgnoreCase(title))
+                .filter(s -> s.getTitle().contains(title))
                 .toList();
     }
 

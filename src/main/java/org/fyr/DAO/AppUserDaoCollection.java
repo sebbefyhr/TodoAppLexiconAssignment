@@ -44,7 +44,7 @@ public class AppUserDaoCollection implements AppUserDAO<AppUser>, Serializable {
                 .filter(s -> s.getUsername().equalsIgnoreCase(username))
                 .findFirst();
 
-        return appie.get();
+        return appie.orElse(null);
     }
 
     @Override

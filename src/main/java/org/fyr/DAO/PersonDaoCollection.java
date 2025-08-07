@@ -27,7 +27,7 @@ public class PersonDaoCollection implements PersonDAO<Person>, Serializable {
 
     @Override
     public Person persist(Person person) {
-        // TODO add check for email if exists, also
+
         if(personList.contains(person)) {
             return person;
         }
@@ -43,16 +43,17 @@ public class PersonDaoCollection implements PersonDAO<Person>, Serializable {
                 .filter(s -> s.getId() == id)
                 .findFirst();
 
-        return p.get();
+        return p.orElse(null);
     }
 
     @Override
     public Person findByEmail(String email) {
+
         Optional<Person> p = personList.stream()
                 .filter(s -> s.getEmail().equalsIgnoreCase(email))
                 .findFirst();
 
-        return p.get();
+        return p.orElse(null);
     }
 
     @Override

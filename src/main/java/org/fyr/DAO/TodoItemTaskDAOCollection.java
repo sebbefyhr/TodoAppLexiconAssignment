@@ -43,7 +43,7 @@ public class TodoItemTaskDAOCollection implements TodoItemTaskDAO<TodoItemTask> 
         return todoItemTasks.stream()
                 .filter(s -> s.getId() == id)
                 .findFirst()
-                .get();
+                .orElse(null);
     }
 
     @Override
@@ -64,6 +64,7 @@ public class TodoItemTaskDAOCollection implements TodoItemTaskDAO<TodoItemTask> 
     public Collection<TodoItemTask> findByPersonId(int personId) {
 
         return todoItemTasks.stream()
+                .filter(s -> s.getAssignee() != null)
                 .filter(s -> s.getAssignee().getId() == personId)
                 .toList();
     }
