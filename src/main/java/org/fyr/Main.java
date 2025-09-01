@@ -9,28 +9,74 @@ import org.fyr.DAO.AppUserDaoCollection;
 import org.fyr.DAO.PersonDaoCollection;
 import org.fyr.DAO.TodoItemDaoCollection;
 import org.fyr.DAO.TodoItemTaskDAOCollection;
+import org.fyr.DAO.data.PeopleImpl;
+import org.fyr.DAO.data.PersonNew;
 import org.fyr.Sequencers.PersonIdSequencer;
 import org.fyr.Sequencers.Sequencer;
 import org.fyr.Sequencers.TodoItemIdSequencer;
 import org.fyr.Sequencers.TodoItemTaskIdSequencer;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.*;
 
 public class Main {
 
     static {
         //TODO -- Behöver jag ha kvar Appuser filen? För det är inga värden som skrivs till den.
-
+/*
         AppUserDaoCollection.getInstance().loadAppusers();
 
         PersonDaoCollection.getInstance().loadPersons();
         TodoItemDaoCollection.getInstance().loadTodoItems();
         TodoItemTaskDAOCollection.getInstance().loadTodoItemTasks();
         loadIDSequencers();
+
+ */
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+        //************** From JDBC Assignment **************
+
+        Connection conn = null;
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/todoit", "root", "1234");
+
+            PeopleImpl people = new PeopleImpl(conn);
+
+
+            people.update(new PersonNew(2, "Simpa", "elbrink"));
+            int person_id = 3;
+            //PersonNew pn = people.create(new PersonNew(person_id++, "mackan", "badboy"));
+
+            //System.out.println(people.deleteById(3));
+
+            //List<PersonNew> list  = (List<PersonNew>) people.findByName("Simon");
+/*
+            for(PersonNew p : list){
+                System.out.println(p.toString());
+            }
+
+ */
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+
+
+        //************** End JDBC Assignment **************
 
         /**
          * No menu has been implemented as I never saw this in the requirements,
@@ -45,8 +91,8 @@ public class Main {
 
 
 
-        saveAllData();
-        saveIdSequencers();
+        //saveAllData();
+        //saveIdSequencers();
     }
 
     private static void saveAllData() {

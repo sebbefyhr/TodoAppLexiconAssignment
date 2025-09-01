@@ -10,7 +10,11 @@ public class PeopleImpl implements People{
     private Connection conn;
 
     public PeopleImpl(Connection conn){
-        this.conn = conn;
+        try {
+            this.conn = conn;
+        } catch (NullPointerException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -119,23 +123,23 @@ public class PeopleImpl implements People{
             throw new RuntimeException(e);
         }
 
-
         return null;
     }
 
     @Override
     public boolean deleteById(int id) {
-        boolean success;
+
         try{
             PreparedStatement deleteById = conn.prepareStatement("delete from person where person_id = ?");
             deleteById.setInt(1, id);
 
             int val = deleteById.executeUpdate();
-            success = val == 1;
+
+            return val == 1;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return success;
+
     }
 }
