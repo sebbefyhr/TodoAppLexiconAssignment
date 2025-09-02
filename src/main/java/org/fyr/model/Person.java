@@ -9,40 +9,36 @@ public class Person implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
-    private String email;
-    private AppUser credentials;
 
     private PersonIdSequencer personIdSequencer = PersonIdSequencer.getInstance();
 
-    public Person(){}
-
-    public Person(String firstName, String lastName, String email) {
+    //TODO -- Ha kvar den här konstruktorn eller ta bort den? hur sätta ID på personer?
+    public Person(int id, String firstName, String lastName) {
         if((firstName== null || firstName.trim().length() == 0) ||
-                (lastName == null || lastName.trim().length() == 0) ||
-                (email == null || email.trim().length() == 0)){
+                (lastName == null || lastName.trim().length() == 0)){
             throw new NullPointerException("Cant be null");
         }
-        this.id = personIdSequencer.nextId();
+        this.id = id;
         this.firstName = firstName.trim();
         this.lastName = lastName.trim();
-        this.email = email.trim();
     }
-    public Person(String firstName, String lastName, String email, AppUser creds) {
+
+    public Person(String firstName, String lastName) {
         if((firstName== null || firstName.trim().length() == 0) ||
-                (lastName == null || lastName.trim().length() == 0) ||
-                (email == null || email.trim().length() == 0)){
+                (lastName == null || lastName.trim().length() == 0)){
             throw new NullPointerException("Cant be null");
         }
-        this.id = personIdSequencer.nextId();
         this.firstName = firstName.trim();
         this.lastName = lastName.trim();
-        this.email = email.trim();
-        this.credentials = creds;
     }
 
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -67,24 +63,6 @@ public class Person implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        if(email == null ||email.trim().length() == 0){
-            throw new NullPointerException("Email cant be empty");
-        }
-        this.email = email;
-    }
-
-    public AppUser getCredentials() {
-        return credentials;
-    }
-
-    public void setCredentials(AppUser credentials) {
-        this.credentials = credentials;
-    }
 
     @Override
     public String toString() {
@@ -92,7 +70,6 @@ public class Person implements Serializable {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
                 '}';
     }
 
@@ -100,11 +77,11 @@ public class Person implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return id == person.id && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(email, person.email);
+        return id == person.id && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email);
+        return Objects.hash(id, firstName, lastName);
     }
 }

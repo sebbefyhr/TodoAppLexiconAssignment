@@ -4,9 +4,11 @@ import org.fyr.model.Person;
 
 import java.util.Collection;
 
-public interface PersonDAO<T> extends GeneralDao<T>{
-
-    T findById(int id);
-    T findByEmail(String email);
-    void remove(int id);
+public interface PersonDAO {
+    Person create (Person p);
+    Collection<Person> findAll();
+    Person findById(int id);
+    Collection<Person> findByName(String name);
+    Person update(Person p);
+    boolean deleteById(int id);
 }

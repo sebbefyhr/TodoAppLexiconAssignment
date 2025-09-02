@@ -10,16 +10,32 @@ public class TodoItem {
     private int id;
     private String title;
     private String description;
-    private LocalDate deadLine;
+    private LocalDate deadline;
     private boolean done;
-    private Person creator;
+    private int assignee_id;
 
     private TodoItemIdSequencer tiis = TodoItemIdSequencer.getInstance();
 
     public TodoItem(){}
 
+    public TodoItem(int id, String title, String description, LocalDate deadline, boolean done, int assignee_id) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.deadline = deadline;
+        this.done = done;
+        this.assignee_id = assignee_id;
+    }
 
-    public TodoItem(String title, String description, LocalDate deadLine, boolean done, Person creator) {
+    public TodoItem(String title, String description, LocalDate deadline, boolean done, int assignee_id) {
+        this.title = title;
+        this.description = description;
+        this.deadline = deadline;
+        this.done = done;
+        this.assignee_id = assignee_id;
+    }
+
+    /*public TodoItem(String title, String description, LocalDate deadLine, boolean done, Person creator) {
         if((title == null || title.trim().length() == 0) || (deadLine == null)){
             throw new NullPointerException("Title or deadline cant be null or empty");
         }
@@ -30,9 +46,13 @@ public class TodoItem {
         this.done = done;
         this.creator = creator;
     }
+     */
 
     public int getId() {
         return id;
+    }
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getTitle() {
@@ -40,9 +60,7 @@ public class TodoItem {
     }
 
     public void setTitle(String title) {
-        if(title == null || title.trim().length() == 0){
-            throw new NullPointerException("Title cant be null or empty");
-        }
+        
         this.title = title;
     }
 
@@ -54,15 +72,12 @@ public class TodoItem {
         this.description = description;
     }
 
-    public LocalDate getDeadLine() {
-        return deadLine;
+    public LocalDate getDeadline() {
+        return deadline;
     }
 
-    public void setDeadLine(LocalDate deadLine) {
-        if(deadLine == null){
-            throw new NullPointerException("Deadline cant be empty");
-        }
-        this.deadLine = deadLine;
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
 
     public boolean isDone() {
@@ -73,17 +88,17 @@ public class TodoItem {
         this.done = done;
     }
 
-    public Person getCreator() {
-        return creator;
+    public int getAssignee_id() {
+        return assignee_id;
     }
 
-    public void setCreator(Person creator) {
-        this.creator = creator;
+    public void setAssignee_id(int assignee_id) {
+        this.assignee_id = assignee_id;
     }
 
     public boolean isOverdue(){
         LocalDate now = LocalDate.now();
-        if(now.isAfter(deadLine)){
+        if(now.isAfter(deadline)){
             return true;
         }
         return false;
@@ -95,7 +110,7 @@ public class TodoItem {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", deadLine=" + deadLine +
+                ", deadLine=" + deadline +
                 ", done=" + done +
                 '}';
     }
@@ -104,11 +119,11 @@ public class TodoItem {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         TodoItem todoItem = (TodoItem) o;
-        return id == todoItem.id && done == todoItem.done && Objects.equals(title, todoItem.title) && Objects.equals(description, todoItem.description) && Objects.equals(deadLine, todoItem.deadLine);
+        return id == todoItem.id && done == todoItem.done && assignee_id == todoItem.assignee_id && Objects.equals(title, todoItem.title) && Objects.equals(description, todoItem.description) && Objects.equals(deadline, todoItem.deadline);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, deadLine, done);
+        return Objects.hash(id, title, description, deadline, done, assignee_id);
     }
 }
