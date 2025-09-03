@@ -77,7 +77,6 @@ public class PersonDaoCollection implements PersonDAO, Serializable {
     @Override
     public Person findById(int id) {
 
-        Person p = null;
         String sqlQuery = "select * from person where person_id = ?";
 
         try (PreparedStatement findById = conn.prepareStatement(sqlQuery)) {
@@ -94,22 +93,26 @@ public class PersonDaoCollection implements PersonDAO, Serializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        //TODO -- throw exception instead of returning null
         return null;
     }
 
     @Override
     public Collection<Person> findByName(String name) {
 
-        //TODO -- Fråga simon om det gäller förname, eftername eller hela namnet??
+        //TODO -- To Simon, This is my solution after asking you.
+        // at first i only checked the first_name but then i added "or last_name"
 
         if (name.trim().isEmpty() || name == null) return null;
 
         List<Person> list = new ArrayList<>();
 
+        String stmnt = "select * from person where first_name = ? or last_name = ?";
+
         try {
-            PreparedStatement findByFirstNAme = conn.prepareStatement("select * from person where first_name = ?");
+            PreparedStatement findByFirstNAme = conn.prepareStatement(stmnt);
             findByFirstNAme.setString(1, name);
+            findByFirstNAme.setString(2, name);
 
             ResultSet rs = findByFirstNAme.executeQuery();
 
@@ -135,7 +138,7 @@ public class PersonDaoCollection implements PersonDAO, Serializable {
 
             int res = updatePerson.executeUpdate();
 
-            //TODO -- works as Should! returns as should?? fråga simon.
+            //TODO -- works as Should! returns as should?? fråga simon om return value.
             if (res > 0) {
                 //ResultSet rs = updatePerson.getResultSet();
                 //return new Person(rs.getInt(1), rs.getString(2), rs.getString(3));

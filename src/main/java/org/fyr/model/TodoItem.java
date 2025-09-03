@@ -112,6 +112,7 @@ public class TodoItem {
                 ", description='" + description + '\'' +
                 ", deadLine=" + deadline +
                 ", done=" + done +
+                ", assigne_id=" + assignee_id +
                 '}';
     }
 
