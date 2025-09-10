@@ -12,7 +12,7 @@ public class Person implements Serializable {
 
     private PersonIdSequencer personIdSequencer = PersonIdSequencer.getInstance();
 
-    //TODO -- Ha kvar den här konstruktorn eller ta bort den? hur sätta ID på personer?
+
     public Person(int id, String firstName, String lastName) {
         if((firstName== null || firstName.trim().length() == 0) ||
                 (lastName == null || lastName.trim().length() == 0)){

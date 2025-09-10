@@ -23,11 +23,12 @@ public class TodoItemDaoCollection implements TodoItemDAO {
     private Connection conn;
 
 
-    //TODO -- keep thses as we now save to db?
+    //TODO -- keep these as we now save to db?
     private static TodoItemDaoCollection todoItemDaoCollection;
     private final String file = "src/main/resources/protocols/TodoItem.json";
     private List<TodoItem> todoItems;
     private ObjectMapper mapper = new ObjectMapper();
+
 
     private TodoItemDaoCollection(Connection conn) {
         this.conn = conn;
@@ -155,7 +156,7 @@ public class TodoItemDaoCollection implements TodoItemDAO {
         List<TodoItem> list = new ArrayList<>();
 
         /*
-        //TODO -- fel att göra så här?
+        //TODO -- Fråga Simon - fel att göra så här?
         List<TodoItem> list = (List<TodoItem>) findByAssignee(person.getId());
          */
 

@@ -3,23 +3,24 @@ package org.fyr;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.fyr.DAO.AppUserDaoCollection;
 import org.fyr.DAO.PersonDaoCollection;
 import org.fyr.DAO.TodoItemDaoCollection;
 import org.fyr.DAO.TodoItemTaskDAOCollection;
-import org.fyr.DAO.data.PeopleImpl;
-import org.fyr.DAO.data.PersonNew;
 import org.fyr.Sequencers.PersonIdSequencer;
 import org.fyr.Sequencers.Sequencer;
 import org.fyr.Sequencers.TodoItemIdSequencer;
 import org.fyr.Sequencers.TodoItemTaskIdSequencer;
+import org.fyr.db.MySQLDBConnection;
+import org.fyr.model.Person;
+import org.fyr.model.TodoItem;
 
 import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
@@ -39,44 +40,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        //************** From JDBC Assignment **************
 
-        Connection conn = null;
-
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/todoit", "root", "1234");
-
-            PeopleImpl people = new PeopleImpl(conn);
-
-
-            people.update(new PersonNew(2, "Simpa", "elbrink"));
-            int person_id = 3;
-            //PersonNew pn = people.create(new PersonNew(person_id++, "mackan", "badboy"));
-
-            //System.out.println(people.deleteById(3));
-
-            //List<PersonNew> list  = (List<PersonNew>) people.findByName("Simon");
-/*
-            for(PersonNew p : list){
-                System.out.println(p.toString());
-            }
-
- */
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-
-
-
-        //************** End JDBC Assignment **************
 
         /**
          * No menu has been implemented as I never saw this in the requirements,
@@ -90,17 +54,16 @@ public class Main {
          */
 
 
-
         //saveAllData();
         //saveIdSequencers();
     }
 
     private static void saveAllData() {
 
-        AppUserDaoCollection.getInstance().saveAppusers();
-        PersonDaoCollection.getInstance().savePersons();
-        TodoItemDaoCollection.getInstance().saveTodoItems();
-        TodoItemTaskDAOCollection.getInstance().saveTodoItemTasks();
+        //AppUserDaoCollection.getInstance().saveAppusers();
+        //PersonDaoCollection.getInstance().savePersons();
+        //TodoItemDaoCollection.getInstance().saveTodoItems();
+        //TodoItemTaskDAOCollection.getInstance().saveTodoItemTasks();
 
     }
 
@@ -133,7 +96,8 @@ public class Main {
             simpMod.addKeyDeserializer(Sequencer.class, new SequencerKeyDeserializer());
 
             mapper.registerModule(simpMod);
-            map = mapper.readValue(reader, new TypeReference<HashMap<Sequencer, Integer>>() {});
+            map = mapper.readValue(reader, new TypeReference<HashMap<Sequencer, Integer>>() {
+            });
 
 
         } catch (FileNotFoundException e) {
@@ -148,17 +112,14 @@ public class Main {
         for (Map.Entry<Sequencer, Integer> entry : map.entrySet()) {
 
 
-            if(entry.getKey() instanceof PersonIdSequencer){
+            if (entry.getKey() instanceof PersonIdSequencer) {
                 System.out.println("PersonIdSequencer");
                 entry.getKey().setCurrentId(entry.getValue());
-            }
-            else if(entry.getKey() instanceof TodoItemIdSequencer){
+            } else if (entry.getKey() instanceof TodoItemIdSequencer) {
                 entry.getKey().setCurrentId(entry.getValue());
-            }
-            else if(entry.getKey() instanceof TodoItemTaskIdSequencer){
+            } else if (entry.getKey() instanceof TodoItemTaskIdSequencer) {
                 entry.getKey().setCurrentId(entry.getValue());
-            }
-            else {
+            } else {
                 System.out.println("----------  NOT A KNOW VALUE!!!!!!!!!!!!!!!!");
             }
 
